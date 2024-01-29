@@ -33,12 +33,16 @@ public :
     void setIconPixmap(const QPixmap &pPixmap);
 
     void setIconTooltip(const QString &pToolTip);
+protected:
+ void	paintEvent(QPaintEvent *event) override;
+
+
 private slots :
     void slotTextChanged ( const QString &pText );
 private :
     void updateIconPositionAndsize();
     void setIconVisible ( bool pisVisible );
-private :
+
     IconVisibilItyMode mIconVisibilItyMode;
     QLabel *mIconLabel; //Указатель на метку, которая отображает пиктограмму
 };

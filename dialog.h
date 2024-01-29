@@ -15,10 +15,8 @@ public:
     explicit Dialog(QWidget *parent = nullptr);
     ~Dialog();
 private:
-    void createUi ();
+    void setupUi ();
 private:
-    IconizedLineEdit *IconizedLineEdit_1;
-    IconizedLineEdit *IconizedLineEdit_2;
     Ui::Dialog *ui;
 };
 

@@ -1,31 +1,28 @@
 #include "dialog.h"
+#include "QRegularExpressionValidator"
 #include "ui_dialog.h"
-#include "IconizedLineEdit.h"
 #include <QVBoxLayout>
 #include <QtCore/qregularexpression.h>
-#include "QRegularExpressionValidator"
-Dialog::Dialog(QWidget *parent)
-        : QDialog(parent) {
-    createUi();
+
+Dialog::Dialog(QWidget *parent) : QDialog(parent), ui(new Ui::Dialog) {
+  ui->setupUi(this);
+  setupUi();
 }
 
-void Dialog::createUi() {
-    QVBoxLayout *lMainLayout = new QVBoxLayout;
-    setLayout(lMainLayout);
-    IconizedLineEdit_1 = new IconizedLineEdit;
-    IconizedLineEdit_1->setPlaceholderText(" Enter your login ");
-    IconizedLineEdit_1->setIconPixmap(QPixmap(":/Images/login.png"));
-    IconizedLineEdit_1->setIconVisibility(IconizedLineEdit::IconAlwaysVisible);
-    lMainLayout->addWidget(IconizedLineEdit_1);
-    IconizedLineEdit_2 = new IconizedLineEdit;
-    IconizedLineEdit_2->setPlaceholderText(" Enter password ");
-    IconizedLineEdit_2->setIconPixmap(QPixmap(":/Images/password.png"));
-    IconizedLineEdit_2->setIconVisibility(IconizedLineEdit::IconAlwaysVisible);
-    lMainLayout->addWidget(IconizedLineEdit_2);
-    IconizedLineEdit_2->setEchoMode(QLineEdit::Password);
-    IconizedLineEdit_1->setValidator( new QRegularExpressionValidator( QRegularExpression( "[A-Z][a-z]{1,9}" ) ) );
+void Dialog::setupUi() {
+  ui->IconizedLineEdit_1->setPlaceholderText(" Enter your login ");
+  ui->IconizedLineEdit_1->setIconPixmap(QPixmap(":/Images/login.png"));
+  ui->IconizedLineEdit_1->setIconVisibility(
+      IconizedLineEdit::IconAlwaysVisible);
+
+  ui->IconizedLineEdit_2->setPlaceholderText(" Enter password ");
+  ui->IconizedLineEdit_2->setIconPixmap(QPixmap(":/Images/password.png"));
+  ui->IconizedLineEdit_2->setIconVisibility(
+      IconizedLineEdit::IconAlwaysVisible);
+
+  ui->IconizedLineEdit_2->setEchoMode(QLineEdit::Password);
+  ui->IconizedLineEdit_1->setValidator(
+      new QRegularExpressionValidator(QRegularExpression("[a-zA-Z0-9_.-]*")));
 }
 
-Dialog::~Dialog() {
-    delete ui;
-}
+Dialog::~Dialog() { delete ui; }
